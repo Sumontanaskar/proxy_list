@@ -2,7 +2,7 @@ import urllib2
 from bs4 import BeautifulSoup
 import base64
 import os
-output_file = ''
+output_file = 'proxychains.conf'
 url = 'https://proxy-list.org/english/index.php'
 
 k = []
@@ -33,6 +33,9 @@ for list in output:
 
 
 file =open('p_list.txt', "r")
+with open(output_file, "wb") as f:
+    f.seek(999999)
+    f.write("\0")
 
 str='''
 dynamic_chain
@@ -41,7 +44,7 @@ tcp_read_time_out 15000
 tcp_connect_time_out 8000
 [ProxyList]
     '''
-f = open('proxychains.conf', "a+")
+f = open(output_file, "a+")
 f.write(str)
 for list in file:
     data = list.split(':')
