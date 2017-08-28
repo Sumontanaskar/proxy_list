@@ -1,7 +1,7 @@
 import urllib2
 from bs4 import BeautifulSoup
 import base64
-
+output_file = ''
 url = 'https://proxy-list.org/english/index.php'
 
 k = []
@@ -29,3 +29,10 @@ for list in output:
         f_write(k)
     else:
         f_write('\n')
+
+
+file =open('p_list.txt', 'r')
+for list in file:
+    data =  list.split(':')
+    k = data[2]+'\t'+data[0]+'\t'+data[1]
+    print k
