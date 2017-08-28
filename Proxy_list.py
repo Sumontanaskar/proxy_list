@@ -37,18 +37,24 @@ with open(output_file, "wb") as f:
     f.seek(999999)
     f.write("\0")
 
-str='''
+str='''# proxychains.conf  VER 3.1
+#
+#        HTTP, SOCKS4, SOCKS5 tunneling proxifier with DNS.
+#
+#strict_chain
+#random_chain
 dynamic_chain
 proxy_dns
 tcp_read_time_out 15000
 tcp_connect_time_out 8000
 [ProxyList]
-    '''
+socks4  127.0.0.1 9050
+'''
 f = open(output_file, "a+")
 f.write(str)
 for list in file:
     data = list.split(':')
-    k = data[2]+'\t'+data[0]+'\t'+data[1]+'\n'
+    k = data[2].lower()+' '+data[0]+' '+data[1]+'\n'
     f.write(k)
     print k
 f.close()
